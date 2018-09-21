@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TextInput, Image } from 'react-native';
+import { StyleSheet, Text, View, TextInput, ImageBackground, Button, Keyboard} from 'react-native';
 
 import Forecast from "./Forecast";
 import OpenWeatherMap from "./open_weather_map";
@@ -28,14 +28,15 @@ export default class WeatherProject extends Component {
           />
         );
     }
+    
     return (
-      <View style={styles.container}>
-        <Image
+      <View style={styles.container} >
+        <ImageBackground
           source={require('./batman.jpg')}
           resizeMode='cover'
           style={styles.backdrop}
         >
-          <View style={styles.overlay}>
+          <View style={styles.overlay} >
             <View style={styles.row}>
               <Text style={styles.mainText}>
                 Current weather for
@@ -43,13 +44,22 @@ export default class WeatherProject extends Component {
               <View Style={styles.zipContainer}>
                 <TextInput
                   style={[styles.zipCode, styles.mainText]}
-                  onSubmitEditing={event => this._handleTextChange(event)}
+                  //onEndEditing={event => this._handleTextChange(event)}
+                  keyboardType={'number-pad'}
+                  onSubmitEditing={Keyboard.dismiss}
                 />
               </View>
             </View>
               {content}
           </View>
-        </Image>
+
+          <View style={styles.buttonZip}>
+            <Button
+              onPress={this._handleTextChange}
+              title="Press Me"
+            />
+          </View>
+        </ImageBackground>
       </View>
     );
   }
@@ -57,7 +67,7 @@ export default class WeatherProject extends Component {
 const baseFontSize = 16;
 
 const styles = StyleSheet.create({
-  container: {flex: 1, alignItems: 'center', paddingTop: 30},
+  container: {flex: 1, paddingTop: 0},
   backdrop: {flex: 1, flexDirection: 'column'},
   overlay: {
     paddingTop: 5,
@@ -80,7 +90,8 @@ const styles = StyleSheet.create({
     marginTop: 3
   },
   zipCode: {flex:1, flexBasis: 1, width: 50, height: baseFontSize},
-  mainText: {fontSize: baseFontSize, color: '#FFFFFF'}
+  mainText: {fontSize: baseFontSize, color: '#FFFFFF'},
+  buttonZip: {paddingTop: 50}
 });
 
 //export default WeatherProject;

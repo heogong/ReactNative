@@ -12,7 +12,7 @@ class Forecast extends Component {
                     Current conditions : {this.props.description}
                 </Text>
                 <Text style={styles.mainText}>
-                    {this.props.temp}도
+                    {this.props.temp}ºC
                 </Text>
             </View>
         );
